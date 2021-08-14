@@ -1,0 +1,40 @@
+.o{border: 2px solid deepskyblue;border-radius: 4px;padding: 1px 2px;}
+
+
+/*
+.tags-inner-wrapper label{
+    margin-right: 14px;
+    margin-bottom: 15px;
+}
+
+input, .texto, .dropdown, .dropdown-menu{
+    border: 2px solid deepskyblue !important;
+}
+
+.dropdown{
+    border-radius: 4px;
+    background-color: white !important;
+}
+
+.dropdown-menu{
+  margin-top: 15px !important;
+  width: 100%;
+}
+
+.dropdown-menu >li{
+    border-bottom-color: deepskyblue !important;
+    border-bottom:2px solid deepskyblue !important;
+}
+.dropdown-menu li:last-child{
+    border-bottom: none !important;
+}
+
+.opcao{
+    text-align: center;
+    padding-left: 15px;
+}
+.opcao input[type='checkbox']{
+    visibility: hidden;
+   
+}
+*/
