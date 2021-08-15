@@ -9,9 +9,25 @@ const Form = () => {
      const [name,setName]=React.useState('');
      const [email,setEmail]=React.useState('');
      const [desc,setDesc]=React.useState('');
-     const [color,setColor]=React.useState('orange');
+     const [list,setList]=React.useState('61170decc241de1182844f30');
      const [size, setSize]=React.useState('small');
      const [isChecked,setIsChecked]=React.useState(false);
+
+
+     //por privado depois
+     const key='9d8a7f134d73959e67911886ac9aa64b';
+     const token='a0224ee5322b96887dbc583374e58a68ecd2e443f6e1a66e500e6d59aed7809c';
+     const listId='61170decc241de1182844f30';
+     const boardId='61170decc241de1182844f2f';
+     const cardId='61170e13ba2a341bf6ae9833';
+
+
+
+
+    
+     
+  
+
 
 
      //tags
@@ -24,9 +40,23 @@ const Form = () => {
    const handleSubmit=(e)=>{
        e.preventDefault();
         const card = {
-            name,email,desc,color,size,tags
+            name,email,desc,list,size,tags
         }
-        console.log(card)
+          const activeLabels = tags.filter((tag)=> tag.marked);
+
+         const labels= activeLabels.map((tag)=>tag.id);
+        
+
+
+        fetch(`https://api.trello.com/1/cards?key=${key}&token=${token}&idList=${list}&name=${card.name}&desc=${card.desc}&idLabels=${labels}`,{
+            method:'POST',
+            headers:{"Content-Type":"application/json"}
+
+        })
+        .then(()=>{console.log('cartao criado com sucesso')})
+        .catch(err=>console.log(err));
+
+
    }
 
 // ATUALIZAR                                                              ATUALIZAR                 
@@ -108,10 +138,11 @@ const Form = () => {
                  </div>
 
                     <div className="select__dropdown mt-5 ms-4 ">
-                        <select className="form-select" aria-label="selecionar cores" value={color} onChange={(e)=>setColor(e.target.value)}>
-                            <option value="white">branco</option>
-                            <option value="orange">laranja</option>
-                            <option value="purple" defaultValue >violeta</option>
+                        <label className='mb-1' >Selecione a lista do cartão</label>
+                        <select className="form-select" aria-label="selecionar a lista" value={list} onChange={(e)=>setList(e.target.value)}>
+                            <option value="61170decc241de1182844f30">A fazer</option>
+                            <option value="61170decc241de1182844f31">Em andamento</option>
+                            <option value="61170decc241de1182844f32" defaultValue >Completo</option>
                         </select>
                     </div>  
                     

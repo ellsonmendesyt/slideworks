@@ -40,12 +40,12 @@ const cardId='61170e13ba2a341bf6ae9833';
     return (
         <div className='row o'>
          <CardList cards={cards}/>
-         
+         {console.log(cards)}
         <Form/>
         
 
         </div>
     )
 }
-
+//https://images.unsplash.com/photo-1628850923193-544e7b81ebad?ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjI5MDM3Mjcy&ixlib=rb-1.2.1&w=2560&h=2048&q=90
 export default Home
