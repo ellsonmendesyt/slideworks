@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from 'react'
 
 import {rotulos} from  '../tags'
-import Tag from './tag';
 
 
 
@@ -24,20 +23,18 @@ const Form = () => {
 
    const handleSubmit=(e)=>{
        e.preventDefault();
-      
         const card = {
             name,email,desc,color,size,tags
         }
-
         console.log(card)
    }
 
-// ATUALIZAR                             ATUALIZAR                 
+// ATUALIZAR                                                              ATUALIZAR                 
    const atualizar=(obj)=>{
        let novasTags=tags.filter((tag)=> tag.id != obj.id);
        let novoObj = {...obj};
        novoObj.marked = !novoObj.marked;
-       setTags([...novasTags, novoObj])
+       setTags([novoObj,...novasTags])
    }
 
 //   React.useEffect(()=>{
@@ -74,7 +71,7 @@ const Form = () => {
                     <input type="email" 
                     className="form-control w-100" 
                     id='email' 
-                    placeholder="demo@host.com" 
+                    placeholder="pessoa@host.com" 
                     autoComplete='off'
                     onChange={(e)=>setEmail(e.target.value)}
                     />
@@ -84,7 +81,7 @@ const Form = () => {
                 <textarea className="texto form-control" 
                 id="exampleFormControlTextarea1" 
                 rows="6" 
-                placeholder='Type something...'
+                placeholder='Descrição...'
                 onChange={(e)=>setDesc(e.target.value)}
                 ></textarea>
                 </div>
@@ -121,10 +118,8 @@ const Form = () => {
                     <div className="tags-wrapper my-4  d-flex py-5 mt-5 ms-4">
                         
                         <div className="tags-box  w-75">
-
-
                             {
-                                tags.map((tag,i)=>(
+                                tags && tags.map((tag,i)=>(
                                     <button 
                                     key={i}
                                     className={`${tag.marked ? "btn btn-primary m-1" : "btn btn-outline-primary m-1"}`}
@@ -134,18 +129,12 @@ const Form = () => {
                                 </button>
                                 ))
                             }
-
-
-
-                          
-
-                            
                         </div>  
                         <div className="submit-box w-25  d-flex justify-content-end align-items-end">
                             <button className='btn btn-primary w-100' type='submit'>Enviar</button>
                         </div>
                     </div>                  
-                </div>56
+                </div>
             </form>
           </div>
         </div>
