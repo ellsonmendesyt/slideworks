@@ -1,8 +1,14 @@
 import React,{useState,useEffect} from 'react'
 
 import {rotulos} from  '../tags'
+import Torrada from './torrada';
+
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
+
+toast.configure();
 
 const Form = () => {
 
@@ -14,9 +20,6 @@ const Form = () => {
      const [tags,setTags]=React.useState(rotulos);
     
 
-
-   
-
      // eu deveria por isso em variavel de ambiente, mas como voces precisam testar deixei as chaves :(
      const key='9d8a7f134d73959e67911886ac9aa64b';
      const token='a0224ee5322b96887dbc583374e58a68ecd2e443f6e1a66e500e6d59aed7809c';
@@ -25,9 +28,9 @@ const Form = () => {
      const cardId='61170e13ba2a341bf6ae9833';
 
 
-
-
-
+    const notify=()=>{
+        toast.success('Cartão criado com sucesso', {position: toast.POSITION.TOP_CENTER, autoClose:2000});
+    }
 
 
    const handleSubmit=(e)=>{
@@ -47,9 +50,10 @@ const Form = () => {
             headers:{"Content-Type":"application/json"}
 
         })
-        .then(()=>{console.log('cartao criado com sucesso'); })
+        .then(()=>{notify() })
         .catch(err=>console.log(err));
-
+       //nofificar
+    //    notify();
        limpartCampos();
      
    }
@@ -66,23 +70,15 @@ const Form = () => {
     tags.forEach(t=>{t.marked=false});
   }
 
-//  React.useEffect(()=>{
-//      setPos('top')
-//  },[]);
 
-  //poe os campos para o valor padrao
-  const limpartCampos=()=>{
-    setName('');
-    setEmail('');
-    setDesc('');
-    setList('1170decc241de1182844f30');
-    setPos('top');
-    resetTags();
- }
-
-
-
-   
+    const limpartCampos=()=>{
+        setName('');
+        setEmail('');
+        setDesc('');
+        setList('1170decc241de1182844f30');
+        setPos('top');
+        resetTags();
+    }
 
 
     return (
@@ -97,6 +93,7 @@ const Form = () => {
                     <label className="form-label" htmlFor='nome'>nome</label>
                     <input 
                     value={name} 
+                    required
                     type="text" 
                     className="form-control w-100" 
                     id='nome' 
@@ -110,6 +107,7 @@ const Form = () => {
                 <div className="mb-3 ">
                     <label value={email} className="form-label" htmlFor='email'>email</label>
                     <input type="email" 
+                    required
                     value={email}
                     className="form-control w-100" 
                     id='email' 
@@ -124,6 +122,7 @@ const Form = () => {
                 <label value={email} className="form-label" htmlFor='descricao'>descrição</label>
                 <textarea 
                 value={desc}
+                required
                 className="texto form-control" 
                 id="descricao" 
                 rows="6" 

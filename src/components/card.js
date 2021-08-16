@@ -7,17 +7,8 @@ const Card = ({card}) => {
 const [labels,setLabels]=React.useState(card.labels);
 
 
-
-  // const {labels}=card;
-  //  console.log(typeof(labels))
-
-
-
-
    React.useEffect(()=>{
-    
     labels.forEach((label)=>{console.log(label.name)});
-
    });
 
     return (
@@ -53,4 +44,4 @@ const [labels,setLabels]=React.useState(card.labels);
   }
   
   export default Card
-  {/* <img src="..." className="card-img-top" alt="..."/> */}
+

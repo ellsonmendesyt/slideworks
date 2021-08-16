@@ -1,5 +1,5 @@
 import React from 'react'
-
+// COMPONENTE NAO USADO, implementado o Form em seu lugar
 const Formulario = () => {
     return (
         <form>

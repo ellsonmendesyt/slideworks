@@ -14,4 +14,4 @@ export const rotulos=[
 
 ]
 
-
+////lista de tas que poderemos escolher pra um cartao

@@ -1,17 +1,18 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
-
-
-body{
-    transition: all .2s ease-in-out;
-}
-
-
+/* 
+  CSS GLOBAL 
+*/
 
 :root{
     --princial: darkturquoise;
     --princial: #0dcaf0;
 }
+
+body{
+    transition: all .2s ease-in-out;
+}
+
 
 .meuform input, .meuform textarea,.meuform, .meuform select {
     border-color: var(--princial);

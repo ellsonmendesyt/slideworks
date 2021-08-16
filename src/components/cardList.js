@@ -3,7 +3,6 @@ import Card from './card'
 
 //cada lista é uma fila
 const CardList = ({cards}) => {
-    // const cards = props.cards;
     
     return (
         <div className='row justify-content-center'>

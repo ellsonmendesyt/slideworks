@@ -5,7 +5,7 @@ import './slider.css';
 const Slider = ({show,toggle}) => {
     return (
         <div className='row justify-content-center'>
-        <label className="switch" >
+        <label className="switch mb-3" >
           <input type="checkbox"  
            value={show}
            onChange={toggle}
