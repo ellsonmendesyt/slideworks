@@ -10,9 +10,12 @@ const Form = () => {
      const [email,setEmail]=React.useState('');
      const [desc,setDesc]=React.useState('');
      const [list,setList]=React.useState('61170decc241de1182844f30');
-     const [size, setSize]=React.useState('small');
-     const [isChecked,setIsChecked]=React.useState(false);
+     const [pos, setPos]=React.useState('top');
+     const [tags,setTags]=React.useState(rotulos);
+    //  const [isChecked,setIsChecked]=React.useState(false);
 
+
+   
 
      //por privado depois
      const key='9d8a7f134d73959e67911886ac9aa64b';
@@ -22,11 +25,10 @@ const Form = () => {
      const cardId='61170e13ba2a341bf6ae9833';
 
 
+   //referencias
 
 
-    
-     
-  
+ 
 
 
 
@@ -35,28 +37,30 @@ const Form = () => {
     //  const [marcados, setMarcados]= React.useState(new Array(tags.length).fill(false));
 
 
-     const [tags,setTags]=React.useState(rotulos);
+    
 
    const handleSubmit=(e)=>{
        e.preventDefault();
+       
         const card = {
-            name,email,desc,list,size,tags
+            name,email,desc,list,pos,tags
         }
           const activeLabels = tags.filter((tag)=> tag.marked);
 
          const labels= activeLabels.map((tag)=>tag.id);
         
+         const url = "https://api.trello.com/1/cards";
 
-
-        fetch(`https://api.trello.com/1/cards?key=${key}&token=${token}&idList=${list}&name=${card.name}&desc=${card.desc}&idLabels=${labels}`,{
+        fetch(`${url}?key=${key}&token=${token}&idList=${list}&name=${card.name}&desc=${card.desc}&idLabels=${labels}&pos=${card.pos}`,{
             method:'POST',
             headers:{"Content-Type":"application/json"}
 
         })
-        .then(()=>{console.log('cartao criado com sucesso')})
+        .then(()=>{console.log('cartao criado com sucesso'); })
         .catch(err=>console.log(err));
 
-
+       limpartCampos();
+     
    }
 
 // ATUALIZAR                                                              ATUALIZAR                 
@@ -67,17 +71,35 @@ const Form = () => {
        setTags([novoObj,...novasTags])
    }
 
-//   React.useEffect(()=>{
-//  {console.log(tags)};
-//   },[tags]);
+   const resetTags=()=>{
+    tags.forEach(t=>{t.marked=false});
+  }
+
+//  React.useEffect(()=>{
+//      setPos('bottom')
+//  },[]);
+
+
+  const limpartCampos=()=>{
+    setName('');
+    setEmail('');
+    setDesc('');
+    setList('1170decc241de1182844f30');
+    setPos('top');
+    resetTags();
+ }
+
+
+
+   
 
 
     return (
         <div className='col'>
           <div className="container">
-            <form className="row" onSubmit={handleSubmit}>
+            <form className="row meuform" onSubmit={handleSubmit}>
   
-                <h5 className='text-center my-4'>Create a trello card {isChecked?'   sim':'  nao'}</h5>
+                <h5 className='text-center my-4'>Create a trello card </h5>
 
                
 
@@ -86,32 +108,38 @@ const Form = () => {
                 {/* Name field */}
                 <div className="mb-3 ">
                     <label className="form-label" htmlFor='nome'>nome</label>
-                    <input value={name} 
+                    <input 
+                    value={name} 
                     type="text" 
                     className="form-control w-100" 
                     id='nome' 
-                    placeholder="cartao teste" 
+                    placeholder="Digite o nome do cartao" 
                     autoComplete='off'
                     onChange={(e)=>setName(e.target.value)}  //interconeta campo e estado
                     />
                 </div>
                 {/* Email field */}
+
                 <div className="mb-3 ">
-                    <label className="form-label" htmlFor='email'>email</label>
+                    <label value={email} className="form-label" htmlFor='email'>email</label>
                     <input type="email" 
+                    value={email}
                     className="form-control w-100" 
                     id='email' 
-                    placeholder="pessoa@host.com" 
+                    placeholder="Digite o email" 
                     autoComplete='off'
-                    onChange={(e)=>setEmail(e.target.value)}
+                    onChange={(e)=>setEmail(e.target.value)} 
                     />
                 </div>
                 {/* Description field */}
                 <div className="my-5">
-                <textarea className="texto form-control" 
-                id="exampleFormControlTextarea1" 
+                <label value={email} className="form-label" htmlFor='descricao'>descrição</label>
+                <textarea 
+                value={desc}
+                className="texto form-control" 
+                id="descricao" 
                 rows="6" 
-                placeholder='Descrição...'
+                placeholder='Digite a descrição...'
                 onChange={(e)=>setDesc(e.target.value)}
                 ></textarea>
                 </div>
@@ -119,44 +147,45 @@ const Form = () => {
                 </div>
                 {/* PAINEL DA DIREITA */}
                 <div className="col-md-6 ">
-                  <div className="d-flex justify-content-around mt-4 pt-2 ">
+                  <div title="Posição do carto na fila" className="d-flex justify-content-around mt-4 pt-2 ">
 
-                 <div className="form-check form-check-inline">
-                      <input defaultChecked onChange={(e)=>setSize(e.target.value)} className="form-check-input" type="radio" name="size" id="size1" value="small"/>
-                       <label className="form-check-label" htmlFor="size1">1</label>
+                 <div className="form-check form-check-inline ">
+                      <input defaultChecked={pos=='top'? true: false}  onChange={(e)=>setPos(e.target.value)} className="form-check-input box" type="radio" name="pos" id="top" value="top"/>
+                       <label className="form-check-label" htmlFor="top">inicio</label>
                 </div>
 
                  <div className="form-check form-check-inline">
-                   <input onChange={(e)=>setSize(e.target.value)} className="form-check-input" type="radio" name="size" id="size2" value="medium"/>
-                   <label className="form-check-label" htmlFor="size2">2</label>
+                   <input defaultChecked={pos=='4'? true: false} onChange={(e)=>setPos(e.target.value)} className="form-check-input" type="radio" name="pos" id="meio" value="4"/>
+                   <label className="form-check-label" htmlFor="meio">meio</label>
                  </div>
 
                  <div className="form-check form-check-inline">
-                   <input onChange={(e)=>setSize(e.target.value)} className="form-check-input" type="radio" name="size" id="size3" value="big" />
-                   <label className="form-check-label" htmlFor="size3">3 </label>
+                   <input defaultChecked={pos=='bottom'? true: false} onChange={(e)=>setPos(e.target.value)} className="form-check-input" type="radio" name="pos" id="fim" value="bottom" />
+                   <label className="form-check-label" htmlFor="fim">fim </label>
                  </div>                    
                  </div>
 
-                    <div className="select__dropdown mt-5 ms-4 ">
+                    <div className=" mt-5 ms-4 ">
                         <label className='mb-1' >Selecione a lista do cartão</label>
-                        <select className="form-select" aria-label="selecionar a lista" value={list} onChange={(e)=>setList(e.target.value)}>
-                            <option value="61170decc241de1182844f30">A fazer</option>
-                            <option value="61170decc241de1182844f31">Em andamento</option>
-                            <option value="61170decc241de1182844f32" defaultValue >Completo</option>
+                        <select className="form-select selecao" aria-label="selecionar a lista" value={list} onChange={(e)=>setList(e.target.value)}>
+                            <option className='opcao' value="61170decc241de1182844f30">A fazer</option>
+                            <option className='opcao' value="61170decc241de1182844f31">Em andamento</option>
+                            <option className='opcao' value="61170decc241de1182844f32" defaultValue >Completo</option>
                         </select>
                     </div>  
                     
-                    <div className="tags-wrapper my-4  d-flex py-5 mt-5 ms-4">
+                    <div className="tags-wrapper my-4  d-flex py-5 mt-2 ms-4">
                         
                         <div className="tags-box  w-75">
+                            <h6 className='tags-title'>Tags</h6>
                             {
                                 tags && tags.map((tag,i)=>(
                                     <button 
                                     key={i}
-                                    className={`${tag.marked ? "btn btn-primary m-1" : "btn btn-outline-primary m-1"}`}
+                                    className={`${tag?.marked ? "botao ativo m-1" : "botao m-1"}`}
                                     onClick={(e)=>{e.preventDefault();atualizar(tag)}}
                                     >
-                                    {tag.name}
+                                    {tag && tag.name}
                                 </button>
                                 ))
                             }
@@ -172,4 +201,4 @@ const Form = () => {
     )
 }
 
-export default Form
+export default Form;

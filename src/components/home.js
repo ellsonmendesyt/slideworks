@@ -34,13 +34,13 @@ const cardId='61170e13ba2a341bf6ae9833';
 
 
     useEffect(()=>{
-        { cards.length>0 && console.log(cards)}  
+        // { cards.length>0 && console.log(cards)}  
     },[cards])
 
     return (
         <div className='row o'>
          <CardList cards={cards}/>
-         {console.log(cards)}
+         {/* {cards.length>0 && console.log(cards)} */}
         <Form/>
         
 
