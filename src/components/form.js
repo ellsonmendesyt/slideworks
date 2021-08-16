@@ -12,12 +12,12 @@ const Form = () => {
      const [list,setList]=React.useState('61170decc241de1182844f30');
      const [pos, setPos]=React.useState('top');
      const [tags,setTags]=React.useState(rotulos);
-    //  const [isChecked,setIsChecked]=React.useState(false);
+    
 
 
    
 
-     //por privado depois
+     // eu deveria por isso em variavel de ambiente, mas como voces precisam testar deixei as chaves :(
      const key='9d8a7f134d73959e67911886ac9aa64b';
      const token='a0224ee5322b96887dbc583374e58a68ecd2e443f6e1a66e500e6d59aed7809c';
      const listId='61170decc241de1182844f30';
@@ -25,19 +25,10 @@ const Form = () => {
      const cardId='61170e13ba2a341bf6ae9833';
 
 
-   //referencias
-
-
- 
 
 
 
-     //tags
-     //cria um vetor de falsos do msmo tamanho do vetor de tags
-    //  const [marcados, setMarcados]= React.useState(new Array(tags.length).fill(false));
 
-
-    
 
    const handleSubmit=(e)=>{
        e.preventDefault();
@@ -63,7 +54,7 @@ const Form = () => {
      
    }
 
-// ATUALIZAR                                                              ATUALIZAR                 
+// ATUALIZAR  recria a lista alternando o estado de marcada                                                                           
    const atualizar=(obj)=>{
        let novasTags=tags.filter((tag)=> tag.id != obj.id);
        let novoObj = {...obj};
@@ -76,10 +67,10 @@ const Form = () => {
   }
 
 //  React.useEffect(()=>{
-//      setPos('bottom')
+//      setPos('top')
 //  },[]);
 
-
+  //poe os campos para o valor padrao
   const limpartCampos=()=>{
     setName('');
     setEmail('');
@@ -99,11 +90,7 @@ const Form = () => {
           <div className="container">
             <form className="row meuform" onSubmit={handleSubmit}>
   
-                <h5 className='text-center my-4'>Create a trello card </h5>
-
-               
-
-
+                <h5 className='text-center '>Create a trello card </h5>
                 <div className="col-md-6 ">
                 {/* Name field */}
                 <div className="mb-3 ">
@@ -132,6 +119,7 @@ const Form = () => {
                     />
                 </div>
                 {/* Description field */}
+
                 <div className="my-5">
                 <label value={email} className="form-label" htmlFor='descricao'>descrição</label>
                 <textarea 
@@ -150,17 +138,17 @@ const Form = () => {
                   <div title="Posição do carto na fila" className="d-flex justify-content-around mt-4 pt-2 ">
 
                  <div className="form-check form-check-inline ">
-                      <input defaultChecked={pos=='top'? true: false}  onChange={(e)=>setPos(e.target.value)} className="form-check-input box" type="radio" name="pos" id="top" value="top"/>
+                      <input checked onChange={(e)=>setPos(e.target.value)} className="form-check-input box" type="radio" name="pos" id="top" value="top"/>
                        <label className="form-check-label" htmlFor="top">inicio</label>
                 </div>
 
                  <div className="form-check form-check-inline">
-                   <input defaultChecked={pos=='4'? true: false} onChange={(e)=>setPos(e.target.value)} className="form-check-input" type="radio" name="pos" id="meio" value="4"/>
+                   <input  onChange={(e)=>setPos(e.target.value)} className="form-check-input" type="radio" name="pos" id="meio" value="4"/>
                    <label className="form-check-label" htmlFor="meio">meio</label>
                  </div>
 
                  <div className="form-check form-check-inline">
-                   <input defaultChecked={pos=='bottom'? true: false} onChange={(e)=>setPos(e.target.value)} className="form-check-input" type="radio" name="pos" id="fim" value="bottom" />
+                   <input  onChange={(e)=>setPos(e.target.value)} className="form-check-input" type="radio" name="pos" id="fim" value="bottom" />
                    <label className="form-check-label" htmlFor="fim">fim </label>
                  </div>                    
                  </div>
