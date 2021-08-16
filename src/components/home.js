@@ -54,10 +54,10 @@ const cardId='61170e13ba2a341bf6ae9833';
         <Form/>
 
            <Slider toggle={toggle}/>
-           {show &&  < CardList cards={cards} /> }
          {/* < CardList cards={cards} /> */}
-         {/* {cards.length>0 && console.log(cards)} */}
+         {/* {cards.length>0 && console.log(cards[0].labels[0].name)} */}
         
+           {show &&  < CardList cards={cards} /> }
 
         </div>
     )

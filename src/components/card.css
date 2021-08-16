@@ -1,0 +1,33 @@
+.card{
+    transition: all .2s ease-in-out;
+    background-color: #EBECF0 !important;
+}
+.card:hover{
+    -webkit-box-shadow: 4px 10px 19px -11px rgba(0,0,0,0.87); 
+    box-shadow: 4px 10px 19px -11px rgba(0,0,0,0.87);
+}
+
+.card-body{
+    background-color: #fff;
+    border-radius: 5px !important;
+}
+
+
+.card-header, .card-footer{
+    background-color:transparent !important;
+    border: none !important;
+}
+
+.tag-element{
+    padding: 2px ;
+}
+
+.tag{
+    margin: 0px 4px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    color:#000;
+    font-size: 13px;
+}
+
+.o{outline: 1px solid orange;}

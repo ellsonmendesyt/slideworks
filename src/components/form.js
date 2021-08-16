@@ -90,7 +90,7 @@ const Form = () => {
           <div className="container">
             <form className="row meuform" onSubmit={handleSubmit}>
   
-                <h5 className='text-center '>Create a trello card </h5>
+                <h6 className='text-center main-title'>Create a trello card </h6>
                 <div className="col-md-6 ">
                 {/* Name field */}
                 <div className="mb-3 ">

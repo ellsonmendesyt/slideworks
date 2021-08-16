@@ -1,3 +1,7 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+
 body{
     transition: all .2s ease-in-out;
 }
@@ -43,3 +47,8 @@ select,option{
 
 .tags-title{color: var(--princial);}
 
+.main-title{
+    font-family: 'Nunito', sans-serif;
+    color: var(--princial);
+    text-transform: uppercase;
+}
